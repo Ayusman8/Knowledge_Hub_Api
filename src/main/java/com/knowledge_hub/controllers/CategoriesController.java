@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.knowledge_hub.dto.ResponseWrapper;
 import com.knowledge_hub.entity.Categories;
 import com.knowledge_hub.service.impl.CategoriesServiceImpl;
 
@@ -21,12 +22,15 @@ public class CategoriesController {
 	CategoriesServiceImpl service;
 	
 	@PostMapping("/create-category")
-	public ResponseEntity<String> createCategory(@RequestBody Categories category){
-		try {
-			service.createCategory(category);
-            return ResponseEntity.ok("Data saved successfully");
-		}catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error saving data: " + e.getMessage());
-		}
+	public ResponseEntity<ResponseWrapper> createCategory(@RequestBody Categories category){
+//		try {
+//			service.createCategory(category);
+//            return ResponseEntity.ok("Data saved successfully");
+//		}catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error saving data: " + e.getMessage());
+//		}
+		Categories createCategoryResponse=this.service.createCategory(category);
+    	return ResponseEntity.status(HttpStatus.OK).body(new 
+    			ResponseWrapper(createCategoryResponse));
 	}
 }

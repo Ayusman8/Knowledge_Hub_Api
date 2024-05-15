@@ -20,7 +20,7 @@ public class Categories {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	private int id;
+	private long id;
 	
 	@Column(name = "category")
 	private String category;
